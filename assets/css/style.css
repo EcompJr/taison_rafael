@@ -24,3 +24,9 @@ ul li a{
 	text-decoration: none;
 	color: white;
 }
+
+.background-img{
+    width: 400px;
+    height: 300px;
+    background-image: url(assets/img/capa3.jpg);
+}
