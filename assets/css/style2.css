@@ -19,3 +19,7 @@
     width: 100%;
     background-color: darkgrey;
 }
+
+.card-login {
+    max-width: 25rem;
+}
