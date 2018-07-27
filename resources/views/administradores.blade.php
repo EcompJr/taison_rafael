@@ -10,20 +10,20 @@
     <title>Perfil Admin</title>
 
     <!-- Custom styles for this template-->
-    <link href="../assets/css/sb-admin.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="../vendor/css/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/magnific-popup.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="../assets/css/style2.css">
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -217,19 +217,19 @@
             </div>
         </div>
         <!-- Bootstrap core JavaScript -->
-        <script src="../vendor/js/jquery.min.js"></script>
-        <script src="../vendor/js/bootstrap.min.js"></script>
+        <script src="jquery/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Plugin JavaScript -->
-        <script src="../vendor/js/jquery.easing.min.js"></script>
-        <script src="../vendor/js/jquery.magnific-popup.min.js"></script>
+        <script src="jquery/jquery.easing.min.js"></script>
+        <script src="jquery/jquery.magnific-popup.min.js"></script>
 
         <!-- Contact Form JavaScript -->
-        <script src="../assets/js/jqBootstrapValidation.js"></script>
-        <script src="../assets/js/contact_me.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
 
         <!-- Custom scripts for this template -->
-        <script src="../assets/js/freelancer.min.js"></script>
+        <script src="js/freelancer.min.js"></script>
     </div>
 </body>
 
