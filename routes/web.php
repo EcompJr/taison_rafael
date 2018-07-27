@@ -48,7 +48,7 @@ Route::get('/eventos-admin', function () {
 });
 
 Route::get('/cursos-admin', function () {
-    return view('index');
+    return view('cursos-admin');
 });
 
 Route::get('/cadastro-adm', function () {

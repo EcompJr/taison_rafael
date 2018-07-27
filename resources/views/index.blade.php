@@ -116,7 +116,7 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum doloremque nobis dolor cumque doloribus nemo at asperiores
             labore laborum deleniti? Quae neque quam corrupti alias aliquam molestias quo, eum possimus.</p>
           <div class="text-center">
-            <a class="btn btn-outline-danger" href="eventos.html">Saiba Mais</a>
+            <a class="btn btn-outline-danger" href="eventos">Saiba Mais</a>
           </div>
         </div>
         <div class="col-md-6 mb-5 mt-5 mb-lg-0">
@@ -124,7 +124,7 @@
           <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum doloremque nobis dolor cumque doloribus nemo at asperiores
             labore laborum deleniti? Quae neque quam corrupti alias aliquam molestias quo, eum possimus.</p>
           <div class="text-center">
-            <a class="btn btn-outline-danger" href="cursos.html">Saiba Mais</a>
+            <a class="btn btn-outline-danger" href="cursos">Saiba Mais</a>
           </div>
         </div>
       </div>
@@ -184,7 +184,7 @@
         <img width="70px" class="img-ecompjr" src="img/ecompjr-icon.png" alt="">
         <p>
           </small>Copyright &copy;
-          <a href="https://github.com/EcompJr">EcompJr</a> 2018</p>
+          <a href="https://github.com/EcompJr" target="_blank">EcompJr</a> 2018</p>
       </div>
     </div>
   </footer>

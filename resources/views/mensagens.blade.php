@@ -10,26 +10,26 @@
     <title>Perfil Admin</title>
 
     <!-- Custom styles for this template-->
-    <link href="../assets/css/sb-admin.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="../vendor/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="../vendor/css/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/magnific-popup.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="../assets/css/style2.css">
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <a class="navbar-brand" href="index.html">CEP</a>
+        <a class="navbar-brand" href="/">CEP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,31 +37,31 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="perfil-admin.html">
+                    <a class="nav-link" href="perfil-admin">
                         <i class="fa fa-fw fa-home"></i>
                         <span class="nav-link-text">Home</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="cursos-admin.html">
+                    <a class="nav-link" href="cursos-admin">
                         <i class="fa fa-fw fa-list-ul"></i>
                         <span class="nav-link-text">Cursos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="eventos-admin.html">
+                    <a class="nav-link" href="eventos-admin">
                         <i class="fa fa-fw fa-th-list"></i>
                         <span class="nav-link-text">Eventos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="administradores.html">
+                    <a class="nav-link" href="administradores">
                         <i class="fa fa-fw fa-users"></i>
                         <span class="nav-link-text">Administradores</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="mensagens.html">
+                    <a class="nav-link" href="mensagens">
                         <i class="fa fa-fw fa-envelope"></i>
                         <span class="nav-link-text">Mensagens</span>
                     </a>
@@ -87,7 +87,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="perfil-admin">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Mensagens</li>
             </ol>
@@ -130,9 +130,9 @@
             <footer class="sticky-footer">
                 <div class="container">
                     <div class="text-center">
-                        <img width="40px" class="img-ecompjr" src="../assets/img/ecompjr-icon.png" alt="">
+                        <img width="40px" class="img-ecompjr" src="img/ecompjr-icon.png" alt="">
                         </small>Copyright &copy;
-                        <a href="https://github.com/EcompJr">EcompJr</a> 2018
+                        <a href="https://github.com/EcompJr" target="_blank">EcompJr</a> 2018
                     </div>
                 </div>
             </footer>
@@ -165,7 +165,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Inscrição</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Resposta</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -184,22 +184,22 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Bootstrap core JavaScript -->
-            <script src="../vendor/js/jquery.min.js"></script>
-            <script src="../vendor/js/bootstrap.min.js"></script>
-
-            <!-- Plugin JavaScript -->
-            <script src="../vendor/js/jquery.easing.min.js"></script>
-            <script src="../vendor/js/jquery.magnific-popup.min.js"></script>
-
-            <!-- Contact Form JavaScript -->
-            <script src="../assets/js/jqBootstrapValidation.js"></script>
-            <script src="../assets/js/contact_me.js"></script>
-
-            <!-- Custom scripts for this template -->
-            <script src="../assets/js/freelancer.min.js"></script>
         </div>
+        <!-- Bootstrap core JavaScript -->
+        <script src="jquery/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+
+        <!-- Plugin JavaScript -->
+        <script src="jquery/jquery.easing.min.js"></script>
+        <script src="jquery/jquery.magnific-popup.min.js"></script>
+
+        <!-- Contact Form JavaScript -->
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
+
+        <!-- Custom scripts for this template -->
+        <script src="js/freelancer.min.js"></script>
+
 </body>
 
 </html>

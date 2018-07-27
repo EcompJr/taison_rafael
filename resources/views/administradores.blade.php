@@ -29,7 +29,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <a class="navbar-brand" href="index.html">CEP</a>
+        <a class="navbar-brand" href="/">CEP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -37,31 +37,31 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                    <a class="nav-link" href="perfil-admin.html">
+                    <a class="nav-link" href="perfil-admin">
                         <i class="fa fa-fw fa-home"></i>
                         <span class="nav-link-text">Home</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="cursos-admin.html">
+                    <a class="nav-link" href="cursos-admin">
                         <i class="fa fa-fw fa-list-ul"></i>
                         <span class="nav-link-text">Cursos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="eventos-admin.html">
+                    <a class="nav-link" href="eventos-admin">
                         <i class="fa fa-fw fa-th-list"></i>
                         <span class="nav-link-text">Eventos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="administradores.html">
+                    <a class="nav-link" href="administradores">
                         <i class="fa fa-fw fa-users"></i>
                         <span class="nav-link-text">Administradores</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="mensagens.html">
+                    <a class="nav-link" href="mensagens">
                         <i class="fa fa-fw fa-envelope"></i>
                         <span class="nav-link-text">Mensagens</span>
                     </a>
@@ -87,7 +87,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="perfil-admin">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Administradores</li>
             </ol>
@@ -188,9 +188,9 @@
         <footer class="sticky-footer">
             <div class="container">
                 <div class="text-center">
-                    <img width="40px" class="img-ecompjr" src="../assets/img/ecompjr-icon.png" alt="">
+                    <img width="40px" class="img-ecompjr" src="img/ecompjr-icon.png" alt="">
                     </small>Copyright &copy;
-                    <a href="https://github.com/EcompJr">EcompJr</a> 2018
+                    <a href="https://github.com/EcompJr" target="_blank">EcompJr</a> 2018
                 </div>
             </div>
         </footer>
@@ -211,7 +211,7 @@
                     <div class="modal-body">Confirme se deseja sair.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                        <a class="btn btn-primary" href="login.html">Sair</a>
+                        <a class="btn btn-primary" href="login-admin">Sair</a>
                     </div>
                 </div>
             </div>
