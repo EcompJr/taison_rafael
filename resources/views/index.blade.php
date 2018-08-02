@@ -57,6 +57,36 @@
     </div>
   </nav>
 
+  <div id="carouselIndicators" class="carousel slide" data-ride="carousel"
+         >
+        <ol class="carousel-indicators">
+            <li data-target="#carouselIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselIndicators" data-slide-to="1"></li>
+        </ol>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="d-block w-100" style="max-width:1349px;" src="{{asset('img/capa1.jpg')}}" alt="First slide">
+                <div class="carousel-caption">
+                  <h2>Fundação Jonathas Telles de Carvalho</h2>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="d-block w-100" style="max-width:1349px;" src="{{asset('img/capa2.jpg')}}" alt="Second slide">
+                <div class="carousel-caption">
+                <h2>Entidade Filantrópica sem fins lucrativos</h2>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" class="slide-nav right" href="#carouselIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+            <span class="sr-only">Anterior</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+            <span class="sr-only">Próximo</span>
+        </a>
+    </div>
+
 
   <!-- Portfolio Grid Section -->
   <section class="portfolio mt-5" id="portfolio">
@@ -173,6 +203,15 @@
             <button type="submit" class="btn btn-outline-success">Enviar Mensagem</button>
           </form>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-secondary" id="servicos">
+    <div class="container">
+      <h6 class="text-uppercase text-white mb-">Gerenciamento do Sistema</h6>
+      <div class="row">
+          <p><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('/login')}}">Login como Administrador</a></p>
       </div>
     </div>
   </section>

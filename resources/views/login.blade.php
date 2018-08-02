@@ -31,10 +31,8 @@
             <input class="form-control" id="senha" type="password" placeholder="Senha">
           </div>
           <div class="form-group">
-            <div class="form-check">
               <label class="form-check-label">
-                <input class="form-check-input" type="checkbox">Continuar Conectado</label>
-            </div>
+                <a href="#">Esqueci a senha</a>
           </div>
           <a class="btn btn-primary btn-block" href="index.html">Login</a>
         </form>

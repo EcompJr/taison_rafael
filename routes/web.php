@@ -10,6 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware(['auth.publico'])->group(function () {
+
+    Route::get('/login', 'AdministradorController@index');
+
+
+});
+
+Route::middleware(['auth.administrador'])->group(function () {
+
+
+
+
+});
+
+
+Route::get('/admin/painel', 'AdministradorController@painel');
 
 Route::get('/', function () {
     return view('index');
