@@ -27,7 +27,7 @@
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        <a class="navbar-brand" href="/">CEP</a>
+        <a class="navbar-brand" href="/">CAP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -41,13 +41,13 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="cursos-admin">
+                    <a class="nav-link" href="{{url('/gerir_cursos')}}">
                         <i class="fa fa-fw fa-list-ul"></i>
                         <span class="nav-link-text">Cursos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="eventos-admin">
+                    <a class="nav-link" href="{{url('/gerir_eventos')}}">
                         <i class="fa fa-fw fa-th-list"></i>
                         <span class="nav-link-text">Eventos</span>
                     </a>
@@ -73,10 +73,22 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+
+                <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->administrador->nome }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" class="nav-link">
+                                    <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" href="#">
+                                        <i class="fa fa-fw fa-sign-out">Logout</i> 
+                                    </a>
+
+                                </div>
                 </li>
+                <!-- <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                </li> -->
             </ul>
         </div>
     </nav>
@@ -186,7 +198,11 @@
                         <div class="modal-body">Confirme se deseja sair.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                            <a class="btn btn-primary" href="login.html">Sair</a>
+                            <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Sair</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                            </form>
                         </div>
                     </div>
                 </div>

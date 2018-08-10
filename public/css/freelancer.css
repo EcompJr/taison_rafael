@@ -138,6 +138,7 @@ header.masthead {
     font-size: 1.3rem;
     font-family: 'Lato'; }
 
+
 @media (min-width: 992px) {
   header.masthead {
     padding-top: calc(6rem + 106px);

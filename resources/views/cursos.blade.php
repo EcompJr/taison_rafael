@@ -33,107 +33,57 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">CAP</a>
+            <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">CAP</a>
         </div>
     </nav>
 
     <section class="portfolio mt-5" id="portfolio">
         <div class="container">
-            <h2 class="text-center text-uppercase text-secondary mb-5">Cursos</h2>
+            <h2 class="text-center text-uppercase text-secondary mb-5">Cursos Ofertados</h2>
             <div class="row">
-                <div class="bg-cursos rounded p-3 mb-5">
-                    <h3 class="text-center mb-4">Lorem, ipsum dolor emque maiores eaepe expedita hic dolorum facil</h3>
+                @foreach($cursos as $curso)
+                    <div class="bg-cursos rounded p-3 mb-4">
+                        <h4 class="text-center mb-4">{{$curso->titulo}}</h4>
+                        
+                        <div>
+                            <span class="titulo2">Carga Horária: </span>
+                            <span class="texto-normal">{{$curso->horasCurso}}</span>
+                        </div>
 
-                    <div>
-                        <span class="titulo2">Objetivo: </span>
-                        <span class="texto-normal">Id repellat praesentium facere minima pefacere minima pefacere minima pefacere minima perspiciatis
-                            iure quo nobis quasi asperiores!</span>
+                        <div>
+                             <span class="titulo2">Vagas: </span>
+                            <span class="texto-normal">{{$curso->vagas}}</span>
+                        </div>
 
+                        <div>
+                            <span class="titulo2">Data: </span>
+                            <span class="texto-normal">{{$curso->data}}</span>
+                         </div>
+
+                        <div>
+                            <span class="titulo2">Turno: </span>
+                            <span class="texto-normal">{{$curso->turno}}</span>         
+                        </div>
+
+                        <div>
+                           <span class="titulo2">Período da Inscrição: </span>
+                            <span class="texto-normal">{{$curso->periodoInscricao}}</span>
+                        </div>
+
+                        <div>
+                            <span class="titulo2">Local: </span>
+                            <span class="texto-normal">{{$curso->local}}</span>
+                        </div>
+
+                        <div class="text-left mt-3">
+                            <a href="{{url('/cadastrar/'.$curso->idCurso)}}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >Inscrever-se</a>
+                        </div>                    
                     </div>
-                    <div>
-                        <span class="titulo2">Público Alvo: </span>
-                        <span class="texto-normal">Todos</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Hora: </span>
-                        <span class="texto-normal">8:00</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Data: </span>
-                        <span class="texto-normal">01/01/2011</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Carga Horária: </span>
-                        <span class="texto-normal">20h</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Local: </span>
-                        <span class="texto-normal">CAP</span>
-                    </div>
-                    <div>
-                        <span class="titulo2">Vagas: </span>
-                        <span class="texto-normal">20</span>
-                    </div>
-                </div>
-                <div class="bg-cursos rounded p-3 mb-5">
-                    <h3 class="text-center mb-4">Lorem, ipsum dolor emque maiores eaepe expedita hic dolorum facil</h3>
-
-                    <div>
-                        <span class="titulo2">Objetivo: </span>
-                        <span class="texto-normal">Id repellat praesentium facere minima pefacere minima pefacere minima pefacere minima perspiciatis
-                            iure quo nobis quasi asperiores!</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Público Alvo: </span>
-                        <span class="texto-normal">Todos</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Hora: </span>
-                        <span class="texto-normal">8:00</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Data: </span>
-                        <span class="texto-normal">01/01/2011</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Carga Horária: </span>
-                        <span class="texto-normal">20h</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Local: </span>
-                        <span class="texto-normal">CAP</span>
-                    </div>
-                    <div>
-                        <span class="titulo2">Vagas: </span>
-                        <span class="texto-normal">20</span>
-                    </div>
-                </div>
-
-                <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Inscrever-se</button>
-            </div>
-    </section>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="copyright py-4 text-center text-white">
-            <div class="container">
-                <img width="70px" class="img-ecompjr" src="img/ecompjr-icon.png" alt="">
-                <p>
-                    </small>Copyright &copy;
-                    <a href="https://github.com/EcompJr" target="_blank">EcompJr</a> 2018</p>
+                @endforeach
             </div>
         </div>
-    </footer>
+    </section>
+
 
     <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
     <div class="scroll-to-top d-lg-none position-fixed ">
@@ -142,9 +92,10 @@
         </a>
     </div>
 
-    <!-- Modal Inscrever-se -->
+    <!-- Modal Subscribe -->
 
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <input type="hidden" name="posting">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -156,41 +107,56 @@
                 <div class="modal-body">
                     <div>
                         <form action="">
+                            <h4>Dados Pessoais</h4>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Seu Nome">
+                                <input type="text" class="form-control" name="nome" placeholder="Nome">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="sobrenome" placeholder="Sobrenome">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="email" name="email" class="form-control" placeholder="Seu Email">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="telefone" class="form-control" placeholder="Seu Telefone">
                             </div>
                             <div class="form-group">
-                                <input type="email" name="" class="form-control" placeholder="Seu Email">
+                                <input type="text" name="formacao" class="form-control" placeholder="Formação Acadêmica">
                             </div>
                             <div class="form-group">
-                                <input type="text" name="" class="form-control" placeholder="Seu Telefone">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="" class="form-control" placeholder="Formação Acadêmica">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" name="" class="form-control" placeholder="Cargo/Função">
+                                <input type="text" name="funcao" class="form-control" placeholder="Cargo/Função">
                             </div>
                             <div class="form-group">
                                 <label for="data">Data de Nascimento</label>
-                                <input type="date" id="data" class="form-control col-4">
+                                <input type="date" id="data" class="form-control col-5">
                             </div>
                             <div class="form-group">
                                 <label for="def-visual">Deficiente Visual:</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="exampleRadios" id="simRadio" value="sim" checked>
-                                    <label class="form-check-label" for="simRadio">
-                                        Sim
-                                    </label>
-                                </div>
-                                <div class="form-check">
                                     <input class="form-check-input" type="radio" name="exampleRadios" id="naoRadio" value="nao">
                                     <label class="form-check-label" for="naoRadio">
-                                        Não
+                                        Nenhuma
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="cegoRadio" value="cego">
+                                    <label class="form-check-label" for="cegoRadio">
+                                        Cego
+                                    </label>
+                                </div>
+
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="exampleRadios" id="poucaRadio" value="pouca">
+                                    <label class="form-check-label" for="poucaRadio">
+                                        Pouca Visão
                                     </label>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <!-- <div class="form-group">
                                 <label for="def-visual">OBS:</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="exampleRadios" id="cegoRadio" value="cego" disabled>
@@ -204,7 +170,7 @@
                                         Pouca Visão
                                     </label>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <div class="form-group">
                                 <label for="def-visual">Para cursista com deficiência visual, Informar abaixo como deseja receber seu material instrucional:</label>
@@ -228,7 +194,7 @@
                                 </div>
                             </div>
 
-                            <div class="mb-2">
+                            <!-- <div class="mb-2">
                                 Cursos:
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="opcao1">
@@ -242,11 +208,33 @@
                                         Curso 2
                                     </label>
                                 </div>
+                            </div> -->
+
+                            <h4>Endereço Residencial</h4>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Sua Rua">
                             </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Seu Bairro">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Sua Cidade">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Seu Estado">
+                            </div>
+
+                            <div class="form-group">
+                                    <input id="contrato" name="contrato" type="checkbox" value="nao">
+                                    <label for="contrato">Declaro que as informações prestadas são verdadeira</label>
+                                </div>
 
                         </form>
 
-                        <h4>Endereço Residencial</h4>
+                        <!-- <h4>Endereço Residencial</h4>
                         <form action="">
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Sua Rua">
@@ -260,7 +248,7 @@
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Seu Estado">
                             </div>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -270,6 +258,18 @@
             </div>
         </div>
     </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="copyright py-4 text-center text-white">
+            <div class="container" class="footer navbar-fixed-bottom">
+                <img width="60px" class="img-ecompjr" src="img/ecompjr-icon.png" alt="">
+                <p>
+                    </small>Copyright &copy;
+                    <a href="https://github.com/EcompJr" target="_blank">EcompJr</a> 2018</p>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap core JavaScript -->
     <script src="jquery/jquery.min.js"></script>
@@ -285,6 +285,8 @@
 
     <!-- Custom scripts for this template -->
     <script src="js/freelancer.min.js"></script>
+
+    <script src="{{asset('js/script_inscricao_curso.js')}}"></script>
 
 
 </body>

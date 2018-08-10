@@ -3,8 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
-class Administrador
+class CheckPublico
 {
     /**
      * Handle an incoming request.
@@ -15,6 +16,10 @@ class Administrador
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::user() == null || Auth::user()->administrador != null) {
+            return $next($request);
+        }
+
+        return redirect()->route('index');
     }
 }

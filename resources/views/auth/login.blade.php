@@ -21,20 +21,23 @@
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input class="form-control" id="email" type="email" aria-describedby="emailHelp" placeholder="Seu Email">
-          </div>
-          <div class="form-group">
-            <label for="senha">Senha</label>
-            <input class="form-control" id="senha" type="password" placeholder="Senha">
-          </div>
-          <div class="form-group">
-              <label class="form-check-label">
-                <a href="#">Esqueci a senha</a>
-          </div>
-          <a class="btn btn-primary btn-block" href="index.html">Login</a>
+        <form method="POST" action="{{ route('admin') }}" name="login" class="login-form">
+          @csrf
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input class="form-control" name="email" type="email" id="email" aria-describedby="emailHelp" placeholder="Seu Email" value="{{old('email')}}">
+            </div>
+            <div class="form-group">
+              <label for="senha">Senha</label>
+              <input class="form-control" name="password" type="password" id="senha" placeholder="Senha">
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">
+                  <a href="#">Esqueci a senha</a>
+            </div>
+            <div>  
+              <button type="submit" class="btn btn-primary btn-block" >Login</button>
+            </div>
         </form>
       </div>
     </div>

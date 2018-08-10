@@ -52,6 +52,9 @@
           <li class="nav-item mx-0 mx-lg-1">
             <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contato">Contato</a>
           </li>
+          <li class="nav-item mx-0 mx-lg-1">
+            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/login') }}">login</a>
+          </li>
         </ul>
       </div>
     </div>
@@ -207,14 +210,14 @@
     </div>
   </section>
 
-  <section class="bg-secondary" id="servicos">
+  <!-- <section class="bg-secondary" id="servicos">
     <div class="container">
       <h6 class="text-uppercase text-white mb-">Gerenciamento do Sistema</h6>
       <div class="row">
-          <p><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger" href="{{url('/login')}}">Login como Administrador</a></p>
+          <p><a class="nav-link py-2 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/login') }}">Login como Administrador</a></p>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Footer -->
   <footer>

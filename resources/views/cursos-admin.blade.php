@@ -28,7 +28,9 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    @include('layouts.header_administrador')
+
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="/">CEP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,13 +45,13 @@
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Charts">
-                    <a class="nav-link" href="cursos-admin">
+                    <a class="nav-link" href="{{url('/gerir_cursos')}}">
                         <i class="fa fa-fw fa-list-ul"></i>
                         <span class="nav-link-text">Cursos</span>
                     </a>
                 </li>
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
-                    <a class="nav-link" href="eventos-admin">
+                    <a class="nav-link" href="{{url('/gerir_eventos')}}">
                         <i class="fa fa-fw fa-th-list"></i>
                         <span class="nav-link-text">Eventos</span>
                     </a>
@@ -75,70 +77,74 @@
                 </li>
             </ul>
             <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+                <li class="nav-item dropdown">
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->administrador->nome }} <span class="caret"></span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" class="nav-link">
+                                    <a class="dropdown-item"  data-toggle="modal" data-target="#exampleModal" href="#">
+                                        <i class="fa fa-fw fa-sign-out">Logout</i> 
+                                    </a>
+
+                                </div>
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="perfil-admin">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Cursos</li>
             </ol>
 
 
             <div class="container">
-                <div class="row">
-                    <div class="bg-cursos rounded p-3 mb-5">
-                        <h3 class="text-center mb-4">Lorem, ipsum dolor emque maiores eaepe expedita hic dolorum facil</h3>
+                    <div class="row">
+                        <button class="btn btn-warning mb-2" data-toggle="modal" data-target="#modalCadastro">Adicionar Curso</button>
+                        @foreach($cursos as $curso)
+                        <div class="bg-cursos rounded p-3 mb-4">
+                            <h4 class="text-center mb-4">{{$curso->titulo}}</h4>
 
-                        <div>
-                            <span class="titulo2">Objetivo: </span>
-                            <span class="texto-normal">Id repellat praesentium facere minima pefacere minima pefacere minima pefacere minima perspiciatis
-                                iure quo nobis quasi asperiores!</span>
+                            <div>
+                                <span class="titulo2">Carga Horária: </span>
+                                <span class="texto-normal">{{$curso->horasCurso}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Público Alvo: </span>
-                            <span class="texto-normal">Todos</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Vagas: </span>
+                                <span class="texto-normal">{{$curso->vagas}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Hora: </span>
-                            <span class="texto-normal">8:00</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Data: </span>
+                                <span class="texto-normal">{{$curso->data}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Data: </span>
-                            <span class="texto-normal">01/01/2011</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Turno: </span>
+                                <span class="texto-normal">{{$curso->turno}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Carga Horária: </span>
-                            <span class="texto-normal">20h</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Período da Inscrição: </span>
+                                <span class="texto-normal">{{$curso->periodoInscricao}}</span>
 
+                            </div>
+                            <div>
+                                <span class="titulo2">Local: </span>
+                                <span class="texto-normal">{{$curso->local}}</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <a class="btn btn-success" href="cursos-admin/alunos-curso">Visualizar Inscritos</a>
+                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Curso</button>
+                                <button class="btn btn-danger">Apagar Curso</button>
+                            </div>
                         </div>
-                        <div>
-                            <span class="titulo2">Local: </span>
-                            <span class="texto-normal">CAP</span>
-                        </div>
-                        <div>
-                            <span class="titulo2">Vagas: </span>
-                            <span class="texto-normal">20</span>
-                        </div>
-                        <div class="text-center mt-3">
-                            <a class="btn btn-success" href="cursos-admin/alunos-curso">Visualizar Inscritos</a>
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Curso</button>
-                            <button class="btn btn-danger">Apagar Curso</button>
-                        </div>
-                    </div>
-                    <button class="btn btn-warning mb-5" data-toggle="modal" data-target="#modalCadastro">Adicionar Curso</button>
+                    @endforeach
                 </div>
             </div>
             <!-- /.container-fluid-->
@@ -169,7 +175,11 @@
                         <div class="modal-body">Confirme se deseja sair.</div>
                         <div class="modal-footer">
                             <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
-                            <a class="btn btn-primary" href="login">Sair</a>
+                            <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">Sair</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -186,37 +196,42 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <input class="form-control" id="titulo" type="text" placeholder="Título do Curso">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="pub-alvo" type="text" placeholder="Público Alvo">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="hora" type="text" placeholder="Horário">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="carga-horas" type="text" placeholder="Carga Horária">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="local" type="text" placeholder="Local do Curso">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="vagas" type="int" placeholder="Número de Vagas">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" name="" id="" cols="30" rows="5" placeholder="Objetivo do Curso"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="data">Data do Curso</label>
-                                    <input type="date" id="data" class="form-control col-5">
-                                </div>
+                            <form method="POST" action="{{ url('/criar/curso') }}">
+                                @csrf
+                                    <div class="form-group">
+                                        <input class="form-control" id="titulo" name="titulo" type="text" placeholder="Título do Curso">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="horasCurso" id="carga-horas" type="text" placeholder="Carga Horária">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="vagas" id="vagas" type="number" placeholder="Número de Vagas">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="data">Data do Curso</label>
+                                        <input type="date" name="data" id="data" class="form-control col-5">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="turno" id="turno" type="text" placeholder="Turno">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="periodoInscricao" id="periodo" type="text" placeholder="Periodo da Inscricao">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Curso">
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                                    </div>    
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
                         </div>
                     </div>
                 </div>

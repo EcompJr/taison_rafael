@@ -28,7 +28,9 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+
+    @include('layouts.header_administrador')
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="/">CEP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,13 +83,13 @@
                 </li>
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="perfil-admin">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Eventos</li>
             </ol>
@@ -95,40 +97,52 @@
 
             <div class="container">
                 <div class="row">
-                    <div class="bg-cursos rounded p-3 mb-5">
-                        <h3 class="text-center mb-4">Lorem, ipsum dolor emque maiores eaepe expedita hic dolorum facil</h3>
+                     <button class="btn btn-warning mb-1" data-toggle="modal" data-target="#modalCadastro">Adicionar Evento</button>
+                    @foreach($eventos as $evento)
+                        <table class="table table-hover shopping-cart-wrap bg-cursos">
+                            
+                            <tbody>
+                                <tr>
+                                    <div class="bg-cursos rounded p-0 mb-2">
+                                        <td>
+                                            <figure class="media">
+                                                <div class="img-wrap" style="float:left; height: 150px; width: 150px">
+                                                    <img src="img/nordeste.jpg" class="img-thumbnail img-sm">
+                                                </div>
+                                            </figure>
+                                        </td>
 
-                        <div>
-                            <span class="titulo2">Descrição: </span>
-                            <span class="texto-normal">Id repellat praesentium facere minima pefacere minima pefacere minima pefacere minima perspiciatis
-                                iure quo nobis quasi asperiores!</span>
+                                        <td>
+                                            <div>
+                                                <span class="titulo2">Descrição: </span>
+                                                <span class="texto-normal">{{$evento->descricao}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Público Alvo: </span>
-                            <span class="texto-normal">Todos</span>
+                                            </div>
+                                            <div>
+                                                <span class="titulo2">Data: </span>
+                                                <span class="texto-normal">{{$evento->data}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Hora: </span>
-                            <span class="texto-normal">8:00</span>
+                                            </div>
+                                            <div>
+                                                <span class="titulo2">Hora: </span>
+                                                <span class="texto-normal">{{$evento->hora}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Data: </span>
-                            <span class="texto-normal">01/01/2011</span>
+                                            </div>
+                                            <div>
+                                                <span class="titulo2">local: </span>
+                                                <span class="texto-normal">{{$evento->local}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Local: </span>
-                            <span class="texto-normal">CAP</span>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Evento</button>
-                            <button class="btn btn-danger">Apagar Evento</button>
-                        </div>
-                    </div>
-                    <button class="btn btn-warning mb-5" data-toggle="modal" data-target="#modalCadastro">Adicionar Evento</button>
+                                            </div>
+                                            <div class="text-center mt-3">
+                                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Evento</button>
+                                                <button class="btn btn-danger">Apagar Evento</button>
+                                            </div>
+                                        </td>
+                                    </div>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endforeach
                 </div>
             </div>
             <!-- /.container-fluid-->
@@ -175,31 +189,31 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form action="">
-                                <div class="form-group">
-                                    <input class="form-control" id="titulo" type="text" placeholder="Título do Evento">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="pub-alvo" type="text" placeholder="Público Alvo">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="hora" type="text" placeholder="Horário">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" id="local" type="text" placeholder="Local do Evento">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="form-control" name="" id="" cols="30" rows="5" placeholder="Descrição do Evento"></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="data">Data do Evento</label>
-                                    <input type="date" id="data" class="form-control col-5">
-                                </div>
+                            <form method="POST" action="{{url('/criar/evento')}}">
+                                @csrf
+                                    <div class="form-group">
+                                        <input class="form-control" id="titulo" type="text" placeholder="Título do Evento">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="hora" id="hora" type="time" placeholder="Horário">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Evento">
+                                    </div>
+                                    <div class="form-group">
+                                        <input class="form-control" type="texto-normal" name="descricao" id="descricao" cols="30" rows="5" placeholder="Descrição do Evento">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="data">Data do Evento</label>
+                                        <input type="date" name="data" id="data" class="form-control col-5">
+                                    </div>
+
+                                     <div class="modal-footer">
+                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                                        <button type="submit" class="btn btn-success">Cadastrar</button>
+                                    </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-success">Cadastrar</button>
                         </div>
                     </div>
                 </div>
