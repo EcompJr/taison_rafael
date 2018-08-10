@@ -26,7 +26,8 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    @include('layouts.header_administrador')
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="/">CAP</a>
         <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
             aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,19 +86,15 @@
 
                                 </div>
                 </li>
-                <!-- <li class="nav-item">
-                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-                        <i class="fa fa-fw fa-sign-out"></i> Logout</a>
-                </li> -->
             </ul>
         </div>
-    </nav>
+    </nav> -->
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="perfil-admin">Home</a>
+                    <a href="#">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Minha Home</li>
             </ol>
@@ -112,7 +109,7 @@
                             </div>
                             <div class="mr-5">10 Novas Mensagens</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="mensagens">
+                        <a class="card-footer text-white clearfix small z-1" href="{{url('/mensagens')}}">
                             <span class="float-left">Ver Detalhes</span>
                             <span class="float-right">
                                 <i class="fa fa-angle-right"></i>
@@ -128,7 +125,7 @@
                             </div>
                             <div class="mr-5">11 Novos Inscritos</div>
                         </div>
-                        <a class="card-footer text-white clearfix small z-1" href="cursos-admin">
+                        <a class="card-footer text-white clearfix small z-1" href="{{url('/gerir_cursos')}}">
                             <span class="float-left">Ver Detalhes</span>
                             <span class="float-right">
                                 <i class="fa fa-angle-right"></i>
@@ -186,7 +183,7 @@
                 <i class="fa fa-angle-up"></i>
             </a>
             <!-- Logout Modal-->
-            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -207,7 +204,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Bootstrap core JavaScript -->
         <script src="jquery/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
