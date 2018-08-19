@@ -96,13 +96,20 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Cursos</li>
             </ol>
 
 
             <div class="container">
+                    @if(isset($errors) && count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach($errors as $erro)
+                            <p>{{$erro}}</p>
+                            @endforeach
+                        </div>
+                    @endif
                     <div class="row">
                         <button class="btn btn-warning mb-2" data-toggle="modal" data-target="#modalCadastro">Adicionar Curso</button>
                         @foreach($cursos as $curso)
@@ -139,12 +146,13 @@
                                 <span class="texto-normal">{{$curso->local}}</span>
                             </div>
                             <div class="text-center mt-3">
-                                <a class="btn btn-success" href="cursos-admin/alunos-curso">Visualizar Inscritos</a>
-                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Curso</button>
-                                <button class="btn btn-danger">Apagar Curso</button>
+                                <a class="btn btn-success" href="{{url('/inscritos'.$curso->idCurso)}}">Visualizar Inscritos</a>
+                                <a href="{{url('/editar_curso'.$curso->idCurso)}}" class="btn btn-primary">Editar Curso</a>
+                                <a class="btn btn-danger" href="{{url('/deletar_curso/'. $curso->idCurso)}}">Apagar Curso</a>
                             </div>
                         </div>
                     @endforeach
+                    {{ $cursos->render() }}
                 </div>
             </div>
             <!-- /.container-fluid-->
@@ -199,32 +207,38 @@
                             <form method="POST" action="{{ url('/criar/curso') }}">
                                 @csrf
                                     <div class="form-group">
-                                        <input class="form-control" id="titulo" name="titulo" type="text" placeholder="Título do Curso">
+                                        <input class="form-control" id="titulo" name="titulo" type="text" placeholder="Título do Curso" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="horasCurso" id="carga-horas" type="text" placeholder="Carga Horária">
+                                        <input class="form-control" name="horasCurso" id="carga-horas" type="text" placeholder="Carga Horária" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="vagas" id="vagas" type="number" placeholder="Número de Vagas">
+                                        <input class="form-control" name="vagas" id="vagas" type="number" placeholder="Número de Vagas" required>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="data">Data do Curso</label>
-                                        <input type="date" name="data" id="data" class="form-control col-5">
+                                        <input type="text" name="data" id="data" class="form-control col-5" data-mask="00/00/0000" placeholder="dd/mm/aaaa" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="turno" id="turno" type="text" placeholder="Turno">
+                                        <label for="def-visual">Turno</label>
+                                        <select class="form-control" name="turno" id="turno" required>
+                                            <option value="">Escolha um Turno</option>
+                                            @foreach($turnos as $turno)
+                                                <option value="{{$turno}}">{{$turno}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="periodoInscricao" id="periodo" type="text" placeholder="Periodo da Inscricao">
+                                        <input class="form-control" name="periodoInscricao" id="periodo" type="text" placeholder="Periodo da Inscricao" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Curso">
+                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Curso" required>
                                     </div>
 
                                     <div class="modal-footer">
@@ -238,7 +252,7 @@
             </div>
 
             <!-- Editar Modal-->
-            <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
+            <!-- <div class="modal fade" id="modalEditar" tabindex="-1" role="dialog" aria-labelledby="modalEditar" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -283,7 +297,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
+
         <!-- Bootstrap core JavaScript -->
         <script src="jquery/jquery.min.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
@@ -295,6 +310,7 @@
         <!-- Contact Form JavaScript -->
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/contact_me.js"></script>
+        <script src="js/jquery.mask.js"></script>
 
         <!-- Custom scripts for this template -->
         <script src="js/freelancer.min.js"></script>

@@ -41,22 +41,41 @@
         Menu
         <i class="fa fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Quem Somos Nós</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#servicos">Serviços</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contato">Contato</a>
-          </li>
-          <li class="nav-item mx-0 mx-lg-1">
-            <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/login') }}">login</a>
-          </li>
-        </ul>
-      </div>
+      @guest
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Quem Somos Nós</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#servicos">Serviços</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contato">Contato</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ url('/login') }}">login</a>
+            </li>
+          </ul>
+        </div>
+      @else
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#portfolio">Quem Somos Nós</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#servicos">Serviços</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="#contato">Contato</a>
+            </li>
+            <li class="nav-item mx-0 mx-lg-1">
+              <a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ route('administrador') }}">{{Auth::user()->administrador->nome}}</a>
+            </li>
+          </ul>
+        </div>
+      @endguest
     </div>
   </nav>
 
@@ -190,18 +209,19 @@
         <div class="col-md-6 mt-5">
           <h4><span class="fa fa-comment"></span> Nos Envie Uma Mensagem:</h4>
 
-          <form action="">
+          <form action="{{url('/enviar_mensagem')}}" method="Post">
+            @csrf
             <div class="form-group">
-              <input type="text" class="form-control" name="" id="" placeholder="Seu Nome">
+              <input type="text" class="form-control" name="nome" id="" placeholder="Seu Nome" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="" id="" placeholder="Seu Email">
+              <input type="text" class="form-control" name="email" id="" placeholder="Seu Email" required>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="" id="" placeholder="Assunto">
+              <input type="text" class="form-control" name="assunto" id="" placeholder="Assunto" required>
             </div>
             <div class="form-group">
-              <textarea name="" class="form-control" id="" cols="30" rows="5" placeholder="Sua Mensagem"></textarea>
+              <textarea name="mensagem" class="form-control" id="" cols="30" rows="5" placeholder="Sua Mensagem" required></textarea>
             </div>
             <button type="submit" class="btn btn-outline-success">Enviar Mensagem</button>
           </form>

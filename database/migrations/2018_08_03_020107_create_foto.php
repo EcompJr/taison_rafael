@@ -14,14 +14,15 @@ class CreateFoto extends Migration
     public function up()
     {
         Schema::create('foto', function (Blueprint $table) {
-            $table->increments('idFoto');
+            $table->increments('id');
             $table->integer('evento_id')->unsigned();
             $table->string('path');
 
+            $table->index('evento_id', 'fk_foto_evento_idx');
 
-            $table->foreign('evento_id')
-                ->references('idEvento')->on('evento')
-                ->onDelete('no action')
+            $table->foreign('evento_id', 'fk_foto_evento_idx')
+                ->references('id')->on('evento')
+                ->onDelete('cascade')
                 ->onUpdate('no action');
 
             $table->engine = 'InnoDB';

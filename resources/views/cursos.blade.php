@@ -76,7 +76,11 @@
                         </div>
 
                         <div class="text-left mt-3">
-                            <a href="{{url('/cadastrar/'.$curso->idCurso)}}" class="btn btn-success" data-toggle="modal" data-target="#exampleModal" >Inscrever-se</a>
+                            @guest
+                            <a href="{{url('/cadastrar'.$curso->idCurso)}}" class="btn btn-success" >Inscrever-se</a>
+                            @else
+                            
+                            @endguest
                         </div>                    
                     </div>
                 @endforeach

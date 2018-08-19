@@ -16,20 +16,19 @@ class CreatePessoa extends Migration
         Schema::create('pessoa', function (Blueprint $table) {
             $table->increments('idPessoa');
             $table->integer('curso_id')->unsigned();
-            $table->tinyInteger('nenhuma')->default(0);;
-            $table->tinyInteger('cego')->default(0);;
-            $table->tinyInteger('poucaVisao')->default(0);;
+            $table->string('deficiencia');
             $table->string('email')->unique();
             $table->string('nome');
             $table->string('sobrenome');
-            $table->date('dataNascimento');
+            $table->string('dataNascimento');
             $table->string('telefone');
             $table->string('formacao');
-            $table->string('funcao');
-            $table->string('rua');
-            $table->string('numero');
+            $table->string('cargo');
+            $table->string('endereco');
+            $table->string('bairro');
             $table->string('cidade');
             $table->string('estado');
+            $table->string('material');
 
             $table->index('curso_id', 'fk_pessoa_curso_idx');
 

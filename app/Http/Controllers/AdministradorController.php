@@ -7,12 +7,33 @@ use Illuminate\Support\Facades\Auth;
 use App\Administrador;
 use App\Curso;
 use App\Evento;
-
+use App\Pessoa;
+use App\Foto;
+use App\Mensagem;
+use App\Acesso;
+use Storage;
+use Illuminate\Support\Facades\DB;
 
 
 class AdministradorController extends Controller
 {
    
+    /**
+    * retorna painel do Administrador
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function admin(request $request){
+        $countPessoa = Pessoa::count();
+        $countMensagem = Mensagem::count();
+        if(DB::table('acesso')->where('id', 1)->count() == 0){
+        $acesso = new Acesso;
+        $acesso->save();
+      }
+        $acesso = Acesso::where('id', '=', 1)->first();
+        return view('perfil-admin', compact('countPessoa', 'countMensagem', 'acesso'));
+    }
+
 	/**
     * Verifica login
     *
@@ -25,9 +46,18 @@ class AdministradorController extends Controller
         		'password' => 'required|max:255'
         	]);
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
-        	return view('perfil-admin');
+            $countPessoa = Pessoa::count();
+            $countMensagem = Mensagem::count();
+
+            if(DB::table('acesso')->where('id', 1)->count() == 0){
+            $acesso = new Acesso;
+            $acesso->save();
+            }
+            
+            $acesso = Acesso::where('id', '=', 1)->first();
+            return view('perfil-admin', compact('countPessoa', 'countMensagem', 'acesso'));
         }
-        return 'Não foi logado';
+        return redirect()->route('login')->with(['errors' => 'login ou senha incorretos']);
     }
 
     /**
@@ -36,11 +66,11 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function curso(){
-        $cursos = Curso::where('administrador_id', '=', Auth::user()->id)->get();
+        $cursos = Curso::orderBy('idCurso', 'DESC')->where('administrador_id', '=', Auth::user()->id)->paginate(3);
 
-        $cursos = Curso::where('administrador_id', '=', Auth::user()->id)->get();
+        $turnos = ['Matutino', 'Vespertino', 'Matutino / Vespertino'];
 
-        return view('cursos-admin', compact('cursos'));
+        return view('cursos-admin', compact('cursos', 'turnos'));
     }
 
     /**
@@ -49,9 +79,10 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function evento(){
-        $eventos = Evento::where('administrador_id', '=', Auth::user()->id)->get();
+        $eventos = Evento::orderBy('id', 'DESC')->where('administrador_id', '=', Auth::user()->id)->paginate(3);
+        $fotos = Foto::all();
 
-        return view('eventos-admin', compact('eventos'));
+        return view('eventos-admin', compact('eventos', 'fotos'));
     }
 
     /**
@@ -61,17 +92,21 @@ class AdministradorController extends Controller
     */
     public function administradores(){
 
+        
+
         return view('administradores');
     }
 
     /**
-    * Retorna view com os administradores
+    * Retorna view com mensagens
     *
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function mensagens(){
 
-        return view('mensagens');
+        $mensagens = Mensagem::paginate(10);
+
+        return view('mensagens', compact('mensagens'));
     }
 
     /**
@@ -109,15 +144,220 @@ class AdministradorController extends Controller
 
         $evento = new Evento;
         $evento->administrador_id = $administrador->idAdministrador;
+        $evento->titulo= $request->titulo;
         $evento->descricao = $request->descricao;
         $evento->data = $request->data;
         $evento->hora = $request->hora;
         $evento->local = $request->local;
 
         $evento->save();
+
+        Foto::where('evento_id', $evento->id)->delete();
+
+        if($request->imagem != null) {
+            $nome = $evento->titulo;
+            $arrayNome = explode(' ', $nome);
+            $primeiroName = $arrayNome[0];
+
+            $nomeImagem = $primeiroName . '_' . $evento->id . '.' . $request->imagem->getClientOriginalExtension();
+            $request->imagem->storeAs('evento_imagens', $nomeImagem);
+
+            $foto = new Foto();
+            $foto->evento_id = $evento->id;
+            $foto->path = "img/" . "img-eventos/" . $nomeImagem;
+            $foto->save();
+
+            $tmpName = $_FILES['imagem']['tmp_name']; // Recebe o arquivo temporário.
+            move_uploaded_file($tmpName, "img/img-eventos/" . $nomeImagem);
+        }
         
         return redirect()->back();
     }
 
    
+   /**
+    * Inscritos no curso
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function cursoInscritos($id){
+        
+        $curso = Curso::where('idCurso', '=', $id)->first();
+        $inscritos = Pessoa::where('curso_id', '=', $id)->get();
+
+        return view('alunos-curso', compact('inscritos', 'curso'));
+    }
+
+    /**
+    * Deletar Curso
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function deletarCurso($id){
+         $curso = Curso::where('idCurso', '=', $id);
+         $pessoa = Pessoa::where('curso_id', '=', $id);
+
+         $delete = $pessoa->delete();
+         $delete2 = $curso->delete();
+         
+         if($delete && $delete2){
+            return redirect()->back();
+         }
+        return redirect()->route('gerir.cursos', $id)->with(['errors' => 'Falha ao deletar']);
+    }
+
+    /**
+    * Deletar Evento
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function deletarEvento($id){
+         $evento = Evento::where('id', '=', $id)->first();
+         $foto = Foto::where('evento_id', '=', $id)->first();
+
+         $nome = $evento->titulo;
+         $arrayNome = explode(' ', $nome);
+         $primeiroName = $arrayNome[0];
+
+         unlink($foto->path);
+
+         // dd($foto->path);
+
+         $delete = $evento->delete();
+         $delete2 = $foto->delete();
+
+         if($delete &&  $delete2){
+            return redirect()->back();
+         }
+        return redirect()->route('gerir.evento', $id)->with(['errors' => 'Falha ao deletar']);
+    }
+
+    /**
+    * Mosta view para Editar curso
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function editarCurso($id){
+         
+         $curso = Curso::where('idCurso', '=', $id)->first();
+
+         $turnos = ['Matutino', 'Vespertino', 'Matutino / Vespertino'];
+
+        return view('editar-curso', compact('curso', 'turnos'));
+    }
+
+    /**
+    * Mosta view para Editar evento
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function editarEvento($id){
+        
+        $evento = Evento::where('id', '=', $id)->first();
+        $foto = Foto::where('evento_id', '=', $id)->first();
+
+        return view('editar-evento', compact('evento', 'foto'));
+    }
+
+    /**
+    * Altera dados do curso
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function alterarCurso(request $request, $id){
+         
+        $dadosForm = $request->all();
+
+        $curso = Curso::where('idCurso', '=', $id)->first();
+
+        $update = $curso->update($dadosForm);
+
+        if($update){
+            $turnos = ['Matutino', 'Vespertino', 'Matutino / Vespertino'];
+            return view('editar-curso', compact('curso', 'turnos'));
+        }
+        
+        return redirect()->route('gerir.cursos', $id)->with(['errors' => 'Falha ao editar curso']);
+    }
+
+    /**
+    * Altera dados do evento
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function alterarEvento(request $request, $id){
+         
+        $dadosForm = $request->all();
+
+        $evento = Evento::where('id', '=', $id)->first();
+
+        $update = $evento->update($dadosForm);
+
+        $foto = Foto::where('evento_id', '=', $id)->first();
+
+        if($request->imagem != null) {
+
+            // $foto = Foto::where('evento_id', '=', $id)->first();
+            unlink($foto->path);
+
+            $delete = $foto->delete();
+
+            $nome = $evento->titulo;
+            $arrayNome = explode(' ', $nome);
+            $primeiroName = $arrayNome[0];
+
+            $nomeImagem = $primeiroName . '_' . $evento->id . '.' . $request->imagem->getClientOriginalExtension();
+            $request->imagem->storeAs('evento_imagens', $nomeImagem);
+
+            $foto = new Foto();
+            $foto->evento_id = $evento->id;
+            $foto->path = "img/" . "img-eventos/" . $nomeImagem;
+            $foto->save();
+
+            $tmpName = $_FILES['imagem']['tmp_name']; // Recebe o arquivo temporário.
+            move_uploaded_file($tmpName, "img/img-eventos/" . $nomeImagem);
+        }
+
+        if($update){
+            
+            
+            return view('editar-evento', compact('evento', 'foto'));
+        }
+        
+        return redirect()->route('gerir.evento', $id)->with(['errors' => 'Falha ao editar curso']);
+    }
+
+    /**
+    * Exibe a mensagem enviada por pessoas
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function exibirMensagem($id){
+        
+        $mensagem = Mensagem::where('id', '=', $id)->first();
+
+        return view('responder-mensagem', compact('mensagem'));
+    }
+
+    /**
+    * Responder a mensagem enviada por pessoas
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function responderMensagem(request $request, $id){
+        
+        $mensagem = Mensagem::where('id', '=', $id)->first();
+
+        $mensagem->resposta = $request->resposta;
+        $mensagem->respondido = true;
+
+        $mensagem->save();
+
+        // $mensagem->update(['resposta' => $request->resposta, 'respondida' => 1]);
+
+
+        return view('responder-mensagem', compact('mensagem'));
+    }
+
+
 }

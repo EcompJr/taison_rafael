@@ -19,13 +19,11 @@ class CreateCurso extends Migration
             $table->string('titulo');
             $table->integer('vagas')->unsigned();
             $table->string('horasCurso');
-            $table->date('data');
+            $table->string('data');
             $table->string('turno');
             $table->string('periodoInscricao');
             $table->string('local');
-            $table->tinyInteger('braille')->default(0);
-            $table->tinyInteger('digitalizado')->default(0);
-            $table->tinyInteger('ampliado')->default(0);
+
 
             $table->index(['administrador_id'], 'fk_curso_administrador_idx');
 

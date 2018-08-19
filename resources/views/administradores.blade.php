@@ -88,7 +88,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="perfil-admin">Home</a>
+                    <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Administradores</li>
             </ol>

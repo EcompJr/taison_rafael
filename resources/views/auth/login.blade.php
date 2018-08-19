@@ -18,6 +18,13 @@
 
 <body class="bg-dark">
   <div class="container">
+    <!-- @if(isset($errors) && count($errors) > 0)
+      <div class="alert alert-danger">
+        @foreach($errors as $erro)
+          <p>{{$erro}}</p>
+        @endforeach
+      </div>
+    @endif -->
     <div class="card card-login mx-auto mt-5">
       <div class="card-header">Login</div>
       <div class="card-body">
@@ -25,11 +32,11 @@
           @csrf
             <div class="form-group">
               <label for="email">Email</label>
-              <input class="form-control" name="email" type="email" id="email" aria-describedby="emailHelp" placeholder="Seu Email" value="{{old('email')}}">
+              <input class="form-control" name="email" type="email" id="email" aria-describedby="emailHelp" placeholder="Seu Email" value="{{old('email')}}" required>
             </div>
             <div class="form-group">
               <label for="senha">Senha</label>
-              <input class="form-control" name="password" type="password" id="senha" placeholder="Senha">
+              <input class="form-control" name="password" type="password" id="senha" placeholder="Senha" required>
             </div>
             <div class="form-group">
                 <label class="form-check-label">

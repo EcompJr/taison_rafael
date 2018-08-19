@@ -33,7 +33,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="/">CAP</a>
+            <a class="navbar-brand js-scroll-trigger" href="{{url('/')}}">CAP</a>
         </div>
     </nav>
 
@@ -41,35 +41,44 @@
         <div class="container">
             <h2 class="text-center text-uppercase text-secondary mb-5">Eventos</h2>
             <div class="row">
-                <div class="bg-cursos rounded p-3 mb-5">
-                    <h3 class="text-center mb-4">Lorem, ipsum dolor emque maiores eaepe expedita hic dolorum facil</h3>
+                @foreach($eventos as $evento)
+                    @php
+                        $foto = $fotos->where('evento_id', '=', $evento->id)->first();
+                     @endphp
+                    <div class="bg-cursos rounded p-2 mb-4">
+                        <div  style="float:left; height:190px; width: 170px; padding: 20px;">
+                            <figure class="media">
+                                <div class="img-wrap" style="height: 190px; width: 150px; overflow: hidden; position: absolute;">
+                                    <img src="{{asset($foto->path)}}" class="img-fluid" alt="Imagem do Evento">
+                                    </div>
+                            </figure>
+                        </div>
+                        
+                        <div style="float:left; padding: 15px;">
+                            <h3 class="text-center mb-2">{{$evento->titulo}}</h3>
+                            <div style="width: 850px">
+                                <span class="titulo2">Descrição: </span>
+                                <span class="texto-normal">{{$evento->descricao}}</span>
+                            </div>
 
-                    <div>
-                        <span class="titulo2">Descrição: </span>
-                        <span class="texto-normal">Id repellat praesentium facere minima pefacere minima pefacere minima pefacere minima perspiciatis
-                            iure quo nobis quasi asperiores!</span>
+                            <div >
+                                <span class="titulo2">Data: </span>
+                                <span class="texto-normal">{{$evento->data}}</span>
+                            </div>
 
-                    </div>
-                    <div>
-                        <span class="titulo2">Público Alvo: </span>
-                        <span class="texto-normal">Todos</span>
+                            <div>
+                                <span class="titulo2">Hora: </span>
+                                <span class="texto-normal">{{$evento->hora}}</span>
+                            </div>
 
+                            <div>
+                                <span class="titulo2">local: </span>
+                                <span class="texto-normal">{{$evento->local}}</span>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <span class="titulo2">Hora: </span>
-                        <span class="texto-normal">8:00</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Data: </span>
-                        <span class="texto-normal">01/01/2011</span>
-
-                    </div>
-                    <div>
-                        <span class="titulo2">Local: </span>
-                        <span class="texto-normal">CAP</span>
-                    </div>
-                </div>
+                @endforeach
+                {{$eventos->render()}}
             </div>
     </section>
 

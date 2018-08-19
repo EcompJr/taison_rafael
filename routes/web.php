@@ -19,10 +19,11 @@ Route::middleware(['auth'])->group(function () {
     //Rotas para administradores ------------------------------------------------------------------------------
     Route::middleware(['auth.administrador'])->group(function () {
         // Route::get('/index', 'PublicoController@index')->name('index');
-        
-        Route::get('/gerir_cursos', 'AdministradorController@curso');
+        Route::get('/admin', 'AdministradorController@admin')->name('administrador');
 
-        Route::get('/gerir_eventos', 'AdministradorController@evento');
+        Route::get('/gerir_cursos', 'AdministradorController@curso')->name('gerir.cursos');
+
+        Route::get('/gerir_eventos', 'AdministradorController@evento')->name('gerir.eventos');
 
         Route::get('/administradores', 'AdministradorController@administradores');
 
@@ -32,6 +33,23 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/criar/evento', 'AdministradorController@criarEvento');
 
+        Route::get('/inscritos{id}', 'AdministradorController@cursoInscritos');
+
+        Route::get('/deletar_curso/{id}', 'AdministradorController@deletarCurso');
+
+        Route::get('/deletar_evento/{id}', 'AdministradorController@deletarEvento');
+
+        Route::get('/editar_curso{id}', 'AdministradorController@editarCurso')->name('editar.curso');
+
+        Route::get('/editar_evento{id}', 'AdministradorController@editarEvento');
+
+        Route::post('/alterarCurso{id}', 'AdministradorController@alterarCurso');
+
+        Route::post('/alterarEvento{id}', 'AdministradorController@alterarEvento');
+
+        Route::get('/exibirMensagem{id}', 'AdministradorController@exibirMensagem');
+
+        Route::post('/responderMensagem{id}', 'AdministradorController@responderMensagem');
 
     });
 
@@ -48,41 +66,17 @@ Route::middleware(['auth.publico'])->group(function () {
 
     Route::get('/eventos', 'PublicoController@eventos');
 
-    Route::get('/cursos', 'PublicoController@cursos');
+    Route::get('/cursos', 'PublicoController@cursos')->name('cursos');
 
     Route::post('/admin', 'AdministradorController@loginAdmin')->name('admin');
 
-    Route::get('/cadastrar/{id}', 'PublicoController@buscarCursos');
+    Route::get('/cadastrar{id}', 'PublicoController@inscricaoCurso');
+
+    Route::post('/inscrever{id}', 'PublicoController@inscrever');
+
+    Route::post('/enviar_mensagem', 'PublicoController@enviarMensagem');
 
 });
-
-
-
-
-
-
-// Route::get('/administradores', function () {
-//     return view('administradores');
-// });
-
-// Route::get('/cursos-admin/alunos-curso', function () {
-//     return view('alunos-curso');
-// });
-
-
-// Route::get('/mensagens', function () {
-//     return view('mensagens');
-// });
-
-
-// Route::get('/eventos-admin', function () {
-//     return view('eventos-admin');
-// });
-
-
-// Route::get('/cadastro-adm', function () {
-//     return view('cadastro');
-// });
 
 
 Auth::routes();

@@ -7,8 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Evento extends Model
 {
     protected $table = 'evento'; 
-    protected $fillable = ['idEvento', 'descricao', 'data', 'hora', 
+    protected $fillable = ['titulo', 'descricao', 'data', 'hora', 
     						'local', 'administrador_id'];
 
 	public $timestamps = false;
+
+	public function foto()
+    {
+        return $this->hasMany('mine_apple\Foto', 'evento_id');
+    }
 }

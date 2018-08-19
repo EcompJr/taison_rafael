@@ -23,7 +23,7 @@
     <!-- Plugin CSS -->
     <link href="bootstrap/css/magnific-popup.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="css/style2.css">
+    <link href="css/style2.css" rel="stylesheet">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -89,7 +89,7 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Eventos</li>
             </ol>
@@ -98,51 +98,49 @@
             <div class="container">
                 <div class="row">
                      <button class="btn btn-warning mb-1" data-toggle="modal" data-target="#modalCadastro">Adicionar Evento</button>
-                    @foreach($eventos as $evento)
-                        <table class="table table-hover shopping-cart-wrap bg-cursos">
-                            
-                            <tbody>
-                                <tr>
-                                    <div class="bg-cursos rounded p-0 mb-2">
-                                        <td>
-                                            <figure class="media">
-                                                <div class="img-wrap" style="float:left; height: 150px; width: 150px">
-                                                    <img src="img/nordeste.jpg" class="img-thumbnail img-sm">
-                                                </div>
-                                            </figure>
-                                        </td>
-
-                                        <td>
-                                            <div>
-                                                <span class="titulo2">Descrição: </span>
-                                                <span class="texto-normal">{{$evento->descricao}}</span>
-
-                                            </div>
-                                            <div>
-                                                <span class="titulo2">Data: </span>
-                                                <span class="texto-normal">{{$evento->data}}</span>
-
-                                            </div>
-                                            <div>
-                                                <span class="titulo2">Hora: </span>
-                                                <span class="texto-normal">{{$evento->hora}}</span>
-
-                                            </div>
-                                            <div>
-                                                <span class="titulo2">local: </span>
-                                                <span class="texto-normal">{{$evento->local}}</span>
-
-                                            </div>
-                                            <div class="text-center mt-3">
-                                                <button class="btn btn-primary" data-toggle="modal" data-target="#modalEditar">Editar Evento</button>
-                                                <button class="btn btn-danger">Apagar Evento</button>
-                                            </div>
-                                        </td>
+                     @foreach($eventos as $evento)
+                        @php
+                            $foto = $fotos->where('evento_id', '=', $evento->id)->first();
+                        @endphp
+                        <div class="bg-cursos rounded p-2 mb-4">
+                            <div  style="float:left; height:190px; width: 170px; padding: 20px;">
+                                <figure class="media">
+                                    <div class="img-wrap" style="height: 190px; width: 150px; overflow: hidden; position: absolute;">
+                                        <img src="{{asset($foto->path)}}" class="img-fluid" alt="Imagem do Evento">
                                     </div>
-                                </tr>
-                            </tbody>
-                        </table>
+                                </figure>
+                            </div>
+                        
+                            <div style="float:left; padding: 15px;">
+                                <h2 class="text-center mb-2">{{$evento->titulo}}</h2>
+                                <div style="width: 850px">
+                                    <span class="titulo2">Descrição: </span>
+                                    <span class="texto-normal">{{$evento->descricao}}</span>
+                                </div>
+
+                                <div >
+                                    <span class="titulo2">Data: </span>
+                                    <span class="texto-normal">{{$evento->data}}</span>
+                                </div>
+
+                                <div>
+                                    <span class="titulo2">Hora: </span>
+                                    <span class="texto-normal">{{$evento->hora}}</span>
+                                </div>
+
+                                <div>
+                                    <span class="titulo2">local: </span>
+                                    <span class="texto-normal">{{$evento->local}}</span>
+                                </div>
+
+                                <div class="text-center mt-3">
+                                    <a href="{{url('/editar_evento'.$evento->id)}}" class="btn btn-primary">Editar Evento</a>
+                                    <a href="{{url('/deletar_evento/'. $evento->id)}}" class="btn btn-danger">Apagar Evento</a>
+                                </div>
+                            </div>
+                        </div>
                     @endforeach
+                    {{$eventos->render()}}
                 </div>
             </div>
             <!-- /.container-fluid-->
@@ -189,24 +187,32 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <form method="POST" action="{{url('/criar/evento')}}">
+                            <form method="POST" action="{{url('/criar/evento')}}" enctype="multipart/form-data" class="registration-form">
                                 @csrf
                                     <div class="form-group">
-                                        <input class="form-control" id="titulo" type="text" placeholder="Título do Evento">
+                                        <label for="form-control">Adicione a imagem do evento:</label>
+                                        <input id="item" type="file" style="margin-bottom: 10px" name="imagem" accept="image/*" class="form-control" required>
                                     </div>
 
                                     <div class="form-group">
-                                        <input class="form-control" name="hora" id="hora" type="time" placeholder="Horário">
+                                        <input class="form-control" name="titulo" id="titulo" type="text" placeholder="Título do Evento" required>
                                     </div>
+
                                     <div class="form-group">
-                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Evento">
+                                        <input class="form-control" type="texto-normal" name="descricao" id="descricao" cols="30" rows="5" placeholder="Descrição do Evento" required>
                                     </div>
-                                    <div class="form-group">
-                                        <input class="form-control" type="texto-normal" name="descricao" id="descricao" cols="30" rows="5" placeholder="Descrição do Evento">
-                                    </div>
+
                                     <div class="form-group">
                                         <label for="data">Data do Evento</label>
-                                        <input type="date" name="data" id="data" class="form-control col-5">
+                                        <input type="text" name="data" id="data" class="form-control col-5" placeholder="dd/mm/aaaa" data-mask="00/00/0000" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="hora" id="hora" type="text" placeholder="--:--" data-mask="00:00" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <input class="form-control" name="local" id="local" type="text" placeholder="Local do Evento" required>
                                     </div>
 
                                      <div class="modal-footer">
@@ -271,6 +277,7 @@
         <!-- Contact Form JavaScript -->
         <script src="js/jqBootstrapValidation.js"></script>
         <script src="js/contact_me.js"></script>
+         <script src="js/jquery.mask.js"></script>
 
         <!-- Custom scripts for this template -->
         <script src="js/freelancer.min.js"></script>

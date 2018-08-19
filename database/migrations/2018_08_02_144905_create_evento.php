@@ -14,11 +14,12 @@ class CreateEvento extends Migration
     public function up()
     {
         Schema::create('evento', function (Blueprint $table) {
-            $table->increments('idEvento');
+            $table->increments('id');
             $table->integer('administrador_id')->unsigned();
+            $table->string('titulo');
             $table->string('descricao');
-            $table->date('data');
-            $table->time('hora');
+            $table->string('data');
+            $table->string('hora');
             $table->string('local');
 
             $table->foreign('administrador_id')

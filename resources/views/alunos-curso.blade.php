@@ -10,20 +10,20 @@
     <title>Perfil Admin</title>
 
     <!-- Custom styles for this template-->
-    <link href="/css/sb-admin.css" rel="stylesheet">
+    <link href="css/sb-admin.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Bootstrap core CSS -->
-    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom fonts for this template -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- Plugin CSS -->
-    <link href="/bootstrap/css/magnific-popup.css" rel="stylesheet" type="text/css">
+    <link href="bootstrap/css/magnific-popup.css" rel="stylesheet" type="text/css">
 
-    <link rel="stylesheet" href="/css/style2.css">
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -88,10 +88,10 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="/cursos-admin">Cursos</a>
+                    <a href="{{url('/gerir_cursos')}}">Cursos</a>
                 </li>
                 <li class="breadcrumb-item active">Alunos</li>
             </ol>
@@ -99,8 +99,9 @@
             <!-- Example DataTables Card-->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-table"></i> TÍTULO DO CURSO</div>
+                    <i class="fa fa-table"></i> {{ $curso->titulo }}</div>
                 <div class="card-body">
+                    @if(isset($inscritos) && $inscritos->count() > 0)
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
@@ -110,8 +111,8 @@
                                     <th>Telefone</th>
                                     <th>Formação Acadêmica</th>
                                     <th>Data Nascimento</th>
-                                    <th>D.V.</th>
-                                    <th>OBS</th>
+                                    <th>D.Visual</th>
+                                    <!-- <th>OBS</th> -->
                                     <th>Material</th>
                                 </tr>
                             </thead>
@@ -122,13 +123,25 @@
                                     <th>Telefone</th>
                                     <th>Formação Acadêmica</th>
                                     <th>Data Nascimento</th>
-                                    <th>D.V.</th>
-                                    <th>OBS</th>
+                                    <th>D.Visual</th>
+                                    <!-- <th>OBS</th> -->
                                     <th>Material</th>
                                 </tr>
                             </tfoot>
                             <tbody>
+                                @foreach($inscritos as $inscrito)
                                 <tr>
+                                    <td>{{ $inscrito->nome}} {{ $inscrito->sobrenome }}</td>
+                                    <td> {{ $inscrito->email }}</td>
+                                    <td>{{ $inscrito->telefone }}</td>
+                                    <td>{{ $inscrito->formacao }}</td>
+                                    <td> {{ $inscrito->dataNascimento }}</td>
+                                    <td>{{ $inscrito->deficiencia }}</td>
+                                    <!-- <td>Cego</td> -->
+                                    <td>{{ $inscrito->material }}</td>
+                                </tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td>José Ricardo Alves</td>
                                     <td>josericardo@gamil.com</td>
                                     <td>74999999999</td>
@@ -157,21 +170,16 @@
                                     <td>Sim</td>
                                     <td>Cego</td>
                                     <td>Braille</td>
-                                </tr>
-                                <tr>
-                                    <td>José Ricardo Alves</td>
-                                    <td>josericardo@gamil.com</td>
-                                    <td>74999999999</td>
-                                    <td>2º Grau</td>
-                                    <td>04/25/1990</td>
-                                    <td>Sim</td>
-                                    <td>Cego</td>
-                                    <td>Braille</td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
                     <button class="btn btn-primary">Gerar PDF</button>
+                    @else
+                        <div class="alert alert-danger">
+                            <p>Nenhum inscrito no Momento</p>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
             </div>
@@ -193,7 +201,7 @@
             <i class="fa fa-angle-up"></i>
         </a>
         <!-- Logout Modal-->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -209,21 +217,21 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Bootstrap core JavaScript -->
-        <script src="/jquery/jquery.min.js"></script>
-        <script src="/bootstrap/js/bootstrap.min.js"></script>
+        <script src="jquery/jquery.min.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
 
         <!-- Plugin JavaScript -->
-        <script src="/jquery/jquery.easing.min.js"></script>
-        <script src="/jquery/jquery.magnific-popup.min.js"></script>
+        <script src="jquery/jquery.easing.min.js"></script>
+        <script src="jquery/jquery.magnific-popup.min.js"></script>
 
         <!-- Contact Form JavaScript -->
-        <script src="/js/jqBootstrapValidation.js"></script>
-        <script src="/js/contact_me.js"></script>
+        <script src="js/jqBootstrapValidation.js"></script>
+        <script src="js/contact_me.js"></script>
 
         <!-- Custom scripts for this template -->
-        <script src="/js/freelancer.min.js"></script>
+        <script src="js/freelancer.min.js"></script>
 
     </div>
 </body>

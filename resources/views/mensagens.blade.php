@@ -88,44 +88,77 @@
             <!-- Breadcrumbs-->
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="#">Home</a>
+                    <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item active">Mensagens</li>
             </ol>
 
+             <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-envelope"></i> Mensagens Recebidas
+                </div>
+                <div class="container">
+                    <div class="row">
+                        <table class="table table-hover" width="100%" cellspacing="0">
+                          <thead>
+                            <tr>
+                              <th>#</th>
+                              <th>Nome</th>
+                              <th>Email</th>
+                              <th>Assunto</th>
+                              <th>Status</th>
+                              <!-- <th></th> -->
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @foreach($mensagens as $mensagem)
+                            <tr data-url="{{url('/exibirMensagem'.$mensagem->id)}}" style='cursor:pointer'>
+                              <th scope="row">{{ $mensagem->id }}</th>
+                              <td>{{ $mensagem->nome }}</td>
+                              <td>{{ $mensagem->email }}</td>
+                              <td>{{ $mensagem->assunto }}</td>
+                              <td>
+                                @if($mensagem->respondido == true)
+                                   <p class="text-white text-center bg-success">Respondido</p>
+                                @else
+                                    <p class=" text-white text-center bg-danger">Pendente</p>
+                                @endif
+                              </td>
+                            </tr>
+                            @endforeach
+                          </tbody>
+                        </table>
+                        <!-- <div class="bg-cursos rounded p-3 mb-5">
 
-            <div class="container">
-                <div class="row">
-                    <div class="bg-cursos rounded p-3 mb-5">
+                            <div>
+                                <span class="titulo2">Nome: </span>
+                                <span class="texto-normal">{{$mensagem->nome}}</span>
 
-                        <div>
-                            <span class="titulo2">Nome: </span>
-                            <span class="texto-normal">João Silva</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Assunto: </span>
+                                <span class="texto-normal">{{$mensagem->assunto}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Assunto: </span>
-                            <span class="texto-normal">Deficiente Visual</span>
+                            </div>
+                            <div>
+                                <span class="titulo2">Email: </span>
+                                <span class="texto-normal">{{$mensagem->email}}</span>
 
-                        </div>
-                        <div>
-                            <span class="titulo2">Email: </span>
-                            <span class="texto-normal">joao@gmail.com</span>
-
-                        </div>
-                        <div>
-                            <span class="titulo2">Mensagem: </span>
-                            <span class="texto-normal">Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur aspernatur asperiores harum
-                                eligendi perferendis consectetur alias doloribus sunt et vel nisi corporis, maxime incidunt
-                                magni voluptates optio nam ullam. Id!</span>
-                        </div>
-                        <div class="text-center mt-3">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#respostaModal">Responder</button>
-                        </div>
+                            </div>
+                            <div>
+                                <span class="titulo2">Mensagem: </span>
+                                <span class="texto-normal">{{$mensagem->mensagem}}</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-success" data-toggle="modal" data-target="#respostaModal">Responder</button>
+                            </div>
+                        </div> -->
                     </div>
-
+                    {{$mensagens->render()}}
                 </div>
             </div>
+        </div>
+    </div>
             <!-- /.container-fluid-->
             <!-- /.content-wrapper-->
             <footer class="sticky-footer">
@@ -200,6 +233,7 @@
 
         <!-- Custom scripts for this template -->
         <script src="js/freelancer.min.js"></script>
+        <script type="text/javascript" src="js/table_mensage.js"></script>
 
 </body>
 
