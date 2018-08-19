@@ -38,9 +38,9 @@
                     <a href="{{route('administrador')}}">Home</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="{{url('/mensagens')}}">Mensagens Recebidas</a>
+                    <a href="{{url('/mensagens')}}">Mensagens</a>
                 </li>
-                <li class="breadcrumb-item active">Mensagem</li>
+                <li class="breadcrumb-item active">{{$mensagem->assunto}}</li>
             </ol>
 
             <!-- Example DataTables Card-->

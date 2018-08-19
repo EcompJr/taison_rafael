@@ -98,30 +98,65 @@
                 <div class="card-header">
                     <i class="fa fa-table"></i> Administradores</div>
                 <div class="card-body">
+                    @if(isset($errors) && count($errors) > 0)
+                        <div class="alert alert-danger">
+                            @foreach($errors as $erro)
+                            <p>{{$erro}}</p>
+                            @endforeach
+                        </div>
+                    @endif
+                    <button class="btn btn-warning mb-1" data-toggle="modal" data-target="#modalCadastro">Cadastrar</button>
                     <div class="table-responsive">
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nome</th>
                                     <th>Email</th>
-                                    <th>Telefone</th>
+                                    <th>Senha</th>
+                                    <!-- <th>Telefone</th>
                                     <th>CPF</th>
                                     <th>Data Nascimento</th>
-                                    <th>Sexo</th>
+                                    <th>Sexo</th> -->
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
+                                    <th>#</th>
                                     <th>Nome</th>
                                     <th>Email</th>
-                                    <th>Telefone</th>
+                                    <th>Senha</th>
+                                    <!-- <th>Telefone</th>
                                     <th>CPF</th>
                                     <th>Data Nascimento</th>
-                                    <th>Sexo</th>
+                                    <th>Sexo</th> -->
                                 </tr>
                             </tfoot>
                             <tbody>
+                                @foreach($users as $user)
                                 <tr>
+                                     <th scope="row">{{$user->id}}</td>
+                                    <td> 
+                                        @php 
+                                            $admin = \App\Administrador::where('idAdministrador', '=', $user->id)->first();
+                                        @endphp
+                                        {{$admin->nome}}
+                                    </td>
+                                    <td>{{$user->email}}</td>
+                                    <td>{{$user->password}}</td>
+                                    <!-- <td>74999999999</td>
+                                    <td>073999999-99</td>
+                                    <td>04/25/1990</td>
+                                    <td>Feminino</td> -->
+                                    <!-- <td>
+                                        <button class="btn btn-primary">Editar</button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger">Excluir</button>
+                                    </td> -->
+                                </tr>
+                                @endforeach
+                                <!-- <tr>
                                     <td>Maria Raimunda Silva</td>
                                     <td>maria@gmail.com</td>
                                     <td>74999999999</td>
@@ -163,22 +198,55 @@
                                         <button class="btn btn-danger">Excluir</button>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>Maria Raimunda Silva</td>
-                                    <td>maria@gmail.com</td>
-                                    <td>74999999999</td>
-                                    <td>073999999-99</td>
-                                    <td>04/25/1990</td>
-                                    <td>Feminino</td>
-                                    <td>
-                                        <button class="btn btn-primary">Editar</button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger">Excluir</button>
-                                    </td>
-                                </tr>
-                            </tbody>
+                            </tbody> -->
                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="modalCadastro" tabindex="-1" role="dialog" aria-labelledby="modalCadastro" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cadastrar Administrador</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ url('/registrar') }}" enctype="multipart/form-data" class="registration-form">
+                            @csrf
+
+                            <div class="form-group row">
+                                <label for="nome" class="col-md-3 col-form-label text-md-right">Nome:</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="nome" type="text" name="nome" value="{{ old('nome') }}" required autofocus>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="email" class="col-md-3 col-form-label text-md-right">Email:</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="email" type="email" name="email" value="{{ old('email') }}" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label for="password" class="col-md-3 col-form-label text-md-right">Senha:</label>
+
+                                <div class="col-md-8">
+                                    <input class="form-control" id="password" type="password" name="password" required>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-danger" type="button" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Registrar</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

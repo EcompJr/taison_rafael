@@ -51,6 +51,8 @@ Route::middleware(['auth'])->group(function () {
 
         Route::post('/responderMensagem{id}', 'AdministradorController@responderMensagem');
 
+        Route::post('/registrar', 'AdministradorController@registrar');
+
     });
 
 

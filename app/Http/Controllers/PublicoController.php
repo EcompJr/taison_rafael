@@ -47,6 +47,7 @@ class PublicoController extends Controller
         return view('eventos', compact('eventos', 'fotos'));
     }
 
+
     /**
     * Retorna tela de cursos
     * 
@@ -58,6 +59,7 @@ class PublicoController extends Controller
 
         return view('cursos', compact('cursos'));
     }
+
 
     /**
     * Retorna tela de cursos
@@ -78,6 +80,7 @@ class PublicoController extends Controller
 
         return view('inscrever-curso', compact('curso', 'formacoes', 'cargos', 'deficiencias', 'materiais'));
     }
+
 
     /**
     * Retorna tela de cursos
@@ -106,6 +109,7 @@ class PublicoController extends Controller
 
        return redirect()->route('cursos');
     }
+    
 
     /**
     * Retorna tela de cursos

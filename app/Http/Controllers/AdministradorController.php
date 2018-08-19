@@ -13,6 +13,7 @@ use App\Mensagem;
 use App\Acesso;
 use Storage;
 use Illuminate\Support\Facades\DB;
+use App\User;
 
 
 class AdministradorController extends Controller
@@ -33,6 +34,7 @@ class AdministradorController extends Controller
         $acesso = Acesso::where('id', '=', 1)->first();
         return view('perfil-admin', compact('countPessoa', 'countMensagem', 'acesso'));
     }
+    
 
 	/**
     * Verifica login
@@ -50,8 +52,8 @@ class AdministradorController extends Controller
             $countMensagem = Mensagem::count();
 
             if(DB::table('acesso')->where('id', 1)->count() == 0){
-            $acesso = new Acesso;
-            $acesso->save();
+                $acesso = new Acesso;
+                $acesso->save();
             }
             
             $acesso = Acesso::where('id', '=', 1)->first();
@@ -59,6 +61,7 @@ class AdministradorController extends Controller
         }
         return redirect()->route('login')->with(['errors' => 'login ou senha incorretos']);
     }
+
 
     /**
     * Retorna view com os cursos
@@ -73,6 +76,7 @@ class AdministradorController extends Controller
         return view('cursos-admin', compact('cursos', 'turnos'));
     }
 
+
     /**
     * Retorna view com os eventos
     *
@@ -85,6 +89,7 @@ class AdministradorController extends Controller
         return view('eventos-admin', compact('eventos', 'fotos'));
     }
 
+
     /**
     * Retorna view com os administradores
     *
@@ -92,10 +97,11 @@ class AdministradorController extends Controller
     */
     public function administradores(){
 
-        
+        $users = User::where('id', '!=', Auth::user()->id)->get();
 
-        return view('administradores');
+        return view('administradores', compact('users'));
     }
+
 
     /**
     * Retorna view com mensagens
@@ -132,6 +138,7 @@ class AdministradorController extends Controller
 
         return redirect()->back();
     }
+
 
     /**
     * Cadastra eventos
@@ -174,6 +181,7 @@ class AdministradorController extends Controller
         return redirect()->back();
     }
 
+
    
    /**
     * Inscritos no curso
@@ -187,6 +195,7 @@ class AdministradorController extends Controller
 
         return view('alunos-curso', compact('inscritos', 'curso'));
     }
+
 
     /**
     * Deletar Curso
@@ -205,6 +214,7 @@ class AdministradorController extends Controller
          }
         return redirect()->route('gerir.cursos', $id)->with(['errors' => 'Falha ao deletar']);
     }
+
 
     /**
     * Deletar Evento
@@ -231,6 +241,7 @@ class AdministradorController extends Controller
          }
         return redirect()->route('gerir.evento', $id)->with(['errors' => 'Falha ao deletar']);
     }
+
 
     /**
     * Mosta view para Editar curso
@@ -259,6 +270,7 @@ class AdministradorController extends Controller
         return view('editar-evento', compact('evento', 'foto'));
     }
 
+
     /**
     * Altera dados do curso
     *
@@ -279,6 +291,7 @@ class AdministradorController extends Controller
         
         return redirect()->route('gerir.cursos', $id)->with(['errors' => 'Falha ao editar curso']);
     }
+
 
     /**
     * Altera dados do evento
@@ -327,6 +340,7 @@ class AdministradorController extends Controller
         return redirect()->route('gerir.evento', $id)->with(['errors' => 'Falha ao editar curso']);
     }
 
+
     /**
     * Exibe a mensagem enviada por pessoas
     *
@@ -338,6 +352,7 @@ class AdministradorController extends Controller
 
         return view('responder-mensagem', compact('mensagem'));
     }
+
 
     /**
     * Responder a mensagem enviada por pessoas
@@ -359,5 +374,29 @@ class AdministradorController extends Controller
         return view('responder-mensagem', compact('mensagem'));
     }
 
+    /**
+    * Cadastra administradores
+    *
+    * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+    */
+    public function registrar(request $request){
+        
+        $request['password'] = bcrypt($request->password);
+        $user = User::create($request->all());
+
+        $administrador = new Administrador;
+        $administrador->idAdministrador = $user->id;
+        $administrador->nome = $request->nome;
+
+        $administrador->save();
+
+
+        $users = User::where('id', '!=', Auth::user()->id)->get();
+
+
+        return view('administradores', compact('users'));
+    }
+
 
 }
+
