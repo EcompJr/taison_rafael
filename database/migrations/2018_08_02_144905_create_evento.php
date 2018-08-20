@@ -21,6 +21,7 @@ class CreateEvento extends Migration
             $table->string('data');
             $table->string('hora');
             $table->string('local');
+            $table->timestamps();
 
             $table->foreign('administrador_id')
                 ->references('idAdministrador')->on('administrador')

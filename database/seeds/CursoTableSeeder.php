@@ -12,6 +12,8 @@ class CursoTableSeeder extends Seeder
      */
     public function run()
     {
+    	date_default_timezone_set('America/Sao_Paulo');
+
         Curso::create([
 	        'idCurso' => 1,
 	        'administrador_id' => 1,

@@ -23,6 +23,7 @@ class CreateCurso extends Migration
             $table->string('turno');
             $table->string('periodoInscricao');
             $table->string('local');
+            $table->timestamps();
 
 
             $table->index(['administrador_id'], 'fk_curso_administrador_idx');

@@ -12,6 +12,8 @@ class EventoTableSeeder extends Seeder
      */
     public function run()
     {
+        date_default_timezone_set('America/Sao_Paulo');
+        
         Evento::create([
 	        'id' => 1,
 	        'administrador_id' => 1,

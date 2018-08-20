@@ -12,6 +12,8 @@ class PessoaCursoTableSeeder extends Seeder
      */
     public function run()
     {
+        date_default_timezone_set('America/Sao_Paulo');
+        
         Pessoa::create([
         	'idPessoa' => 1,
         	'curso_id' => 3,

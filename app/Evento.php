@@ -10,8 +10,6 @@ class Evento extends Model
     protected $fillable = ['titulo', 'descricao', 'data', 'hora', 
     						'local', 'administrador_id'];
 
-	public $timestamps = false;
-
 	public function foto()
     {
         return $this->hasMany('mine_apple\Foto', 'evento_id');

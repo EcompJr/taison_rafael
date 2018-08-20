@@ -121,6 +121,8 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function criarCurso(request $request){
+
+        date_default_timezone_set('America/Sao_Paulo');
         
         $administrador = Auth::user()->administrador;
 
@@ -146,6 +148,8 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function criarEvento(request $request){
+
+        date_default_timezone_set('America/Sao_Paulo');
         
         $administrador = Auth::user()->administrador;
 
@@ -192,8 +196,9 @@ class AdministradorController extends Controller
         
         $curso = Curso::where('idCurso', '=', $id)->first();
         $inscritos = Pessoa::where('curso_id', '=', $id)->get();
+        $lastpessoa = Pessoa::orderBy('idPessoa', 'desc')->first();
 
-        return view('alunos-curso', compact('inscritos', 'curso'));
+        return view('alunos-curso', compact('inscritos', 'curso', 'lastpessoa'));
     }
 
 
@@ -277,6 +282,8 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function alterarCurso(request $request, $id){
+
+        date_default_timezone_set('America/Sao_Paulo');
          
         $dadosForm = $request->all();
 
@@ -299,6 +306,8 @@ class AdministradorController extends Controller
     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
     */
     public function alterarEvento(request $request, $id){
+
+        date_default_timezone_set('America/Sao_Paulo');
          
         $dadosForm = $request->all();
 

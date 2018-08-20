@@ -89,6 +89,8 @@ class PublicoController extends Controller
     */
     public function inscrever(request $request, $id){
 
+      date_default_timezone_set('America/Sao_Paulo');
+       
        $pessoa = new Pessoa;
        $pessoa->curso_id = $id;
        $pessoa->nome = $request->nome;

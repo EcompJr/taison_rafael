@@ -29,6 +29,7 @@ class CreatePessoa extends Migration
             $table->string('cidade');
             $table->string('estado');
             $table->string('material');
+            $table->timestamps();
 
             $table->index('curso_id', 'fk_pessoa_curso_idx');
 
