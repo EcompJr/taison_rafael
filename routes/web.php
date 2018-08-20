@@ -14,7 +14,7 @@
 //Rotas para usuários cadastrados ----------------------------------------------------------------------------------
 Route::middleware(['auth'])->group(function () {
 
-    // Route::get('/home', 'PublicoController@index');
+    Route::get('/home', 'PublicoController@index');
 
     //Rotas para administradores ------------------------------------------------------------------------------
     Route::middleware(['auth.administrador'])->group(function () {
@@ -70,7 +70,7 @@ Route::middleware(['auth.publico'])->group(function () {
 
     Route::get('/cursos', 'PublicoController@cursos')->name('cursos');
 
-    Route::post('/admin', 'AdministradorController@loginAdmin')->name('admin');
+    // Route::post('/admin', 'AdministradorController@loginAdmin')->name('admin');
 
     Route::get('/cadastrar{id}', 'PublicoController@inscricaoCurso');
 
@@ -80,7 +80,7 @@ Route::middleware(['auth.publico'])->group(function () {
 
 });
 
-
+//Rota de recuperação de senha
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

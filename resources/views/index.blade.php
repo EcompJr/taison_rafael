@@ -99,12 +99,12 @@
                 </div>
             </div>
         </div>
-        <a class="carousel-control-prev" class="slide-nav right" href="#carouselIndicators" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+        <a class="carousel-control-prev" class="slide-nav left" href="#carouselIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon bg-secondary card" aria-hidden="true"></span>
             <span class="sr-only">Anterior</span>
         </a>
-        <a class="carousel-control-next" href="#carouselIndicators" role="button" data-slide="next">
-            <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+        <a class="carousel-control-next" class="slide-nav right" href="#carouselIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon bg-secondary card" aria-hidden="true"></span>
             <span class="sr-only">Próximo</span>
         </a>
     </div>
@@ -187,28 +187,59 @@
     <div class="container">
       <h2 class="text-center text-uppercase text-secondary mb-0">Contatos</h2>
       <div class="row">
-        <div class="col-md-6 mt-5">
-          <h4><span class="fa fa-map-marker"></span> ENDEREÇO:</h4>
-          <p>Avenida Eduardo Fróes da Mota</p>
-          <p>nº 05, Bairro Santa Mônica</p>
-          <p>Feira de Santana – BA.</p>
+        @guest
+          <div class="col-md-6 mt-5">
+            <h4><span class="fa fa-map-marker"></span> ENDEREÇO:</h4>
+            <p>Avenida Eduardo Fróes da Mota</p>
+            <p>nº 05, Bairro Santa Mônica</p>
+            <p>Feira de Santana – BA.</p>
 
-          <h4><span class="fa fa-phone"></span> TELEFONE:</h4>
-          <p>(75) 3625-7755</p>
+            <h4><span class="fa fa-phone"></span> TELEFONE:</h4>
+            <p>(75) 3625-7755</p>
 
-          <h4><span class="fa fa-envelope"></span> EMAIL:</h4>
-          <p>capdvfeira@gmail.com</p>
+            <h4><span class="fa fa-envelope"></span> EMAIL:</h4>
+            <p>capdvfeira@gmail.com</p>
 
-          <h4>Redes Sociais:</h4>
-          <a class="btn btn-secondary btn-social text-center rounded-circle" href="https://www.facebook.com/cap.dv"  target="_blank">
-            <i class="fa fa-fw fa-facebook"></i>
-          </a>
+            <h4>Redes Sociais:</h4>
+            <a class="btn btn-secondary btn-social text-center rounded-circle" href="https://www.facebook.com/cap.dv"  target="_blank">
+              <i class="fa fa-fw fa-facebook"></i>
+            </a>
+            <a class="btn btn-secondary btn-social text-center rounded-circle" href="https://plus.google.com/110388063672121291531"  target="_blank">
+              <i class="fa fa-fw fa-google-plus"></i>
+            </a>
+          </div>
+        @else
+          <div class="col-md-3 mb-5 mt-5 mb-lg-0">
+            <h4><span class="fa fa-map-marker"></span> ENDEREÇO:</h4>
+            <p>Avenida Eduardo Fróes da Mota</p>
+            <p>nº 05, Bairro Santa Mônica</p>
+            <p>Feira de Santana – BA.</p>
+          </div>
 
-        </div>
+          <div class="col-md-3 mb-5 mt-5 mb-lg-0">
+            <h4><span class="fa fa-phone"></span> TELEFONE:</h4>
+            <p>(75) 3625-7755</p>
+         </div>
 
+          <div class="col-md-3 mb-5 mt-5 mb-lg-0">
+            <h4><span class="fa fa-envelope"></span> EMAIL:</h4>
+            <p>capdvfeira@gmail.com</p>
+          </div>
+
+          <div class="col-md-3 mb-5 mt-5 mb-lg-0">
+            <h4>Redes Sociais:</h4>
+            <a class="btn btn-secondary btn-social text-center rounded-circle" href="https://www.facebook.com/cap.dv"  target="_blank">
+              <i class="fa fa-fw fa-facebook"></i>
+            </a>
+            <a class="btn btn-secondary btn-social text-center rounded-circle" href="https://plus.google.com/110388063672121291531"  target="_blank">
+              <i class="fa fa-fw fa-google-plus"></i>
+            </a>
+          </div>
+        @endguest
+
+        @guest
         <div class="col-md-6 mt-5">
           <h4><span class="fa fa-comment"></span> Nos Envie Uma Mensagem:</h4>
-
           <form action="{{url('/enviar_mensagem')}}" method="Post">
             @csrf
             <div class="form-group">
@@ -226,6 +257,9 @@
             <button type="submit" class="btn btn-outline-success">Enviar Mensagem</button>
           </form>
         </div>
+        @else
+
+        @endguest
       </div>
     </div>
   </section>
@@ -261,6 +295,8 @@
   <!-- Bootstrap core JavaScript -->
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="css/style2.css"></script>
 
   <!-- Plugin JavaScript -->
   <script src="jquery/jquery.easing.min.js"></script>

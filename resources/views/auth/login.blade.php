@@ -17,18 +17,21 @@
 </head>
 
 <body class="bg-dark">
+
   <div class="container">
-    <!-- @if(isset($errors) && count($errors) > 0)
+    <div class="card-login mx-auto mt-3">
+    @if(isset($errors) && count($errors) > 0)
       <div class="alert alert-danger">
-        @foreach($errors as $erro)
+        @foreach($errors->all() as $erro)
           <p>{{$erro}}</p>
         @endforeach
       </div>
-    @endif -->
-    <div class="card card-login mx-auto mt-5">
+    @endif
+  </div>
+    <div class="card card-login mx-auto mt-3">
       <div class="card-header">Login</div>
       <div class="card-body">
-        <form method="POST" action="{{ route('admin') }}" name="login" class="login-form">
+        <form method="POST" action="{{ route('login') }}" name="login" class="login-form">
           @csrf
             <div class="form-group">
               <label for="email">Email</label>
@@ -36,10 +39,10 @@
             </div>
             <div class="form-group">
               <label for="senha">Senha</label>
-              <input class="form-control" name="password" type="password" id="senha" placeholder="Senha" required>
+              <input class="form-control" name="password" type="password" id="senha" minlength="8" placeholder="Senha" required>
             </div>
             <div class="form-group">
-                <label class="form-check-label">
+                <label class="form-check-label"></label>
                   <a href="#">Esqueci a senha</a>
             </div>
             <div>  
@@ -49,6 +52,8 @@
       </div>
     </div>
   </div>
+
+
   <!-- Bootstrap core JavaScript -->
   <script src="jquery/jquery.min.js"></script>
   <script src="bootstrap/js/bootstrap.min.js"></script>
